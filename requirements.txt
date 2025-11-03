@@ -1,0 +1,40 @@
+
+# Requirements for Face_Verification (notebook + Jetson/DeepFace helpers)
+# Notes:
+# - TensorRT is provided by the Jetson system (do NOT install via pip). This file
+#   lists Python packages used by the notebook and helpers (DeepFace, ONNX tooling, PyCUDA).
+# - On Jetson Nano prefer using the system's OpenCV/TensorFlow packages; some pip wheels
+#   may not be compatible with Jetson's ARM platform.
+
+# Core ML / numeric libs
+numpy>=1.19
+scipy
+
+# Deep learning (keep broad; pin if you need reproducible envs)
+tensorflow>=2.0
+
+# Computer vision / image IO
+opencv-python
+Pillow
+
+# Notebook / plotting / utilities
+matplotlib
+ipython
+scikit-learn
+
+# DeepFace for gender/face attribute analysis
+deepface
+
+# ONNX / conversion / runtime (used when exporting to ONNX and building TRT engine)
+tf2onnx
+onnx
+onnxruntime
+
+
+# NOTE: `pycuda` and other CUDA-dependent packages are NOT portable to macOS
+# (they require NVIDIA CUDA headers and libraries). If you are developing on macOS
+# keep this file as-is (without pycuda). For deployment on a Jetson Nano, use
+# `requirements-jetson.txt` which includes pycuda and other Jetson-specific items.
+
+# Optional: if running in Google Colab, the notebook uses some Colab helpers (optional)
+# google-colab

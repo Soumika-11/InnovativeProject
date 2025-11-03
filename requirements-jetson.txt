@@ -1,0 +1,25 @@
+# Jetson-specific Python requirements
+# Build/install these on the Jetson device (ARM64, with CUDA & TensorRT installed).
+# Note: TensorRT is provided by the Jetson SDK and should NOT be installed via pip.
+
+numpy
+scipy
+opencv-python
+Pillow
+matplotlib
+ipython
+scikit-learn
+
+# DeepFace (may pull heavy TF deps)
+deepface
+
+# ONNX conversion/runtime
+tf2onnx
+onnx
+onnxruntime
+
+# PyCUDA: requires CUDA toolkit headers & libraries present on the device
+pycuda
+
+# Optional (only if you plan to run conversion on the Jetson itself)
+# tf2onnx may be slow on Jetson Nano; you can convert on a workstation instead.
