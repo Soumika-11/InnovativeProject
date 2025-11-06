@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  face-verification:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: face_verification_jetson
+    runtime: nvidia
+    privileged: true
+    
+    # Device access for USB webcam
+    devices:
+      - /dev/video0:/dev/video0
+      - /dev/video1:/dev/video1
+    
+    # Volume mounts
+    volumes:
+      - ./output:/app/output
+      - ./data_extracted:/app/data_extracted
+      - ./face_embedding_model_CLEAN.h5:/app/face_embedding_model_CLEAN.h5
+      - ./model_architecture.json:/app/model_architecture.json
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    
+    # Environment variables
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - CAMERA_INDEX=0
+      - VERIFICATION_THRESHOLD=0.6
+      - IMG_SIZE=128
+      - EMBEDDING_DIM=64
+    
+    # Network mode for display
+    network_mode: host
+    
+    # Resource limits for Jetson Nano (4GB model)
+    deploy:
+      resources:
+        limits:
+          memory: 3G
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    
+    # Restart policy
+    restart: unless-stopped
+    
+    # Stdin and tty for interactive mode
+    stdin_open: true
+    tty: true

@@ -1,40 +1,33 @@
 
-# Requirements for Face_Verification (notebook + Jetson/DeepFace helpers)
-# Notes:
-# - TensorRT is provided by the Jetson system (do NOT install via pip). This file
-#   lists Python packages used by the notebook and helpers (DeepFace, ONNX tooling, PyCUDA).
-# - On Jetson Nano prefer using the system's OpenCV/TensorFlow packages; some pip wheels
-#   may not be compatible with Jetson's ARM platform.
+# Face Verification System - Local Machine Requirements
+# Converted from Google Colab to run on localhost with USB webcam
+# Compatible with macOS, Linux, and Windows
 
 # Core ML / numeric libs
-numpy>=1.19
-scipy
+numpy>=1.19.0
+scipy>=1.5.0
 
-# Deep learning (keep broad; pin if you need reproducible envs)
-tensorflow>=2.0
+# Deep learning
+tensorflow>=2.8.0
 
-# Computer vision / image IO
-opencv-python
-Pillow
+# Computer vision / image processing
+opencv-python>=4.5.0
+Pillow>=8.0.0
 
 # Notebook / plotting / utilities
-matplotlib
-ipython
-scikit-learn
+matplotlib>=3.3.0
+ipython>=7.0.0
+jupyter>=1.0.0
+notebook>=6.0.0
+scikit-learn>=0.24.0
 
-# DeepFace for gender/face attribute analysis
-deepface
+# Optional: DeepFace for gender/face attribute analysis
+# Uncomment the line below if you want gender detection features
+# deepface>=0.0.75
 
-# ONNX / conversion / runtime (used when exporting to ONNX and building TRT engine)
-tf2onnx
-onnx
-onnxruntime
-
-
-# NOTE: `pycuda` and other CUDA-dependent packages are NOT portable to macOS
-# (they require NVIDIA CUDA headers and libraries). If you are developing on macOS
-# keep this file as-is (without pycuda). For deployment on a Jetson Nano, use
-# `requirements-jetson.txt` which includes pycuda and other Jetson-specific items.
-
-# Optional: if running in Google Colab, the notebook uses some Colab helpers (optional)
-# google-colab
+# Notes:
+# 1. This configuration is optimized for local machine with USB webcam
+# 2. All Google Colab dependencies have been removed
+# 3. Camera access is handled via OpenCV's cv2.VideoCapture
+# 4. DeepFace is optional - install only if needed for gender detection
+# 5. TensorFlow GPU support requires additional CUDA/cuDNN setup

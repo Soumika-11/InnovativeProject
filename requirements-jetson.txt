@@ -1,25 +1,35 @@
-# Jetson-specific Python requirements
-# Build/install these on the Jetson device (ARM64, with CUDA & TensorRT installed).
-# Note: TensorRT is provided by the Jetson SDK and should NOT be installed via pip.
+# Face Verification System - Jetson Nano Requirements
+# Optimized for NVIDIA Jetson Nano with L4T and TensorFlow pre-installed
 
-numpy
-scipy
-opencv-python
-Pillow
-matplotlib
-ipython
-scikit-learn
+# Note: TensorFlow comes pre-installed in the base image (l4t-tensorflow)
+# Do not install tensorflow via pip on Jetson Nano
 
-# DeepFace (may pull heavy TF deps)
-deepface
+# Core ML / numeric libs (compatible with ARM64)
+numpy>=1.19.0,<1.24.0
+scipy>=1.5.0,<1.10.0
 
-# ONNX conversion/runtime
-tf2onnx
-onnx
-onnxruntime
+# Computer vision / image processing
+# OpenCV is pre-installed via apt in Dockerfile
+opencv-python>=4.5.0
 
-# PyCUDA: requires CUDA toolkit headers & libraries present on the device
-pycuda
+# Image processing
+Pillow>=8.0.0,<10.0.0
 
-# Optional (only if you plan to run conversion on the Jetson itself)
-# tf2onnx may be slow on Jetson Nano; you can convert on a workstation instead.
+# Plotting / utilities
+matplotlib>=3.3.0,<3.7.0
+scikit-learn>=0.24.0,<1.2.0
+
+# HDF5 support for model loading
+h5py>=2.10.0,<3.8.0
+
+# Optional: DeepFace for gender/face attribute analysis
+# Note: May have performance issues on Jetson Nano
+# deepface>=0.0.75
+
+# Additional utilities
+tqdm>=4.50.0
+pyyaml>=5.4.0
+
+# For future REST API support (optional)
+# flask>=2.0.0
+# flask-cors>=3.0.10
